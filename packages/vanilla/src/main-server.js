@@ -162,7 +162,7 @@ async function prefetchData(routeInfo, params, query) {
 }
 
 function generateMetaTags(routeInfo, query, data) {
-  let title = "쇼핑몰";
+  let title = "쇼핑몰 - 홈";
   let description = "최고의 쇼핑 경험을 제공합니다.";
 
   if (routeInfo?.path === "/product/:id/" && data.currentProduct) {
@@ -174,6 +174,8 @@ function generateMetaTags(routeInfo, query, data) {
       title = `${query.search} 검색 결과 - 쇼핑몰`;
     } else if (query?.category1) {
       title = `${query.category1} ${query.category2 || ""} - 쇼핑몰`.trim();
+    } else {
+      title = "쇼핑몰 - 홈";
     }
   }
 
