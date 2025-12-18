@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { loadNextProducts, loadProductsAndCategories, ProductList, SearchBar } from "../entities";
+import { loadNextProducts, loadProductsAndCategories, ProductList, SearchBar, useProductURLSync } from "../entities";
 import { PageWrapper } from "./PageWrapper";
 
 const headerLeft = (
@@ -27,9 +27,17 @@ const unregisterScrollHandler = () => {
 };
 
 export const HomePage = () => {
+  // URL 쿼리 변경 시 상품 목록 다시 로드
+  useProductURLSync();
+
   useEffect(() => {
     registerScrollHandler();
-    loadProductsAndCategories();
+
+    // SSR/SSG 데이터가 없으면 로드 (카테고리 포함)
+    const hasInitialData = window.__INITIAL_DATA__;
+    if (!hasInitialData) {
+      loadProductsAndCategories();
+    }
 
     return unregisterScrollHandler;
   }, []);

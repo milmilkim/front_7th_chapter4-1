@@ -1,6 +1,6 @@
 import { router } from "../router";
-import { useRouter } from "@hanghae-plus/lib";
+import { useUniversalRouter } from "../../hooks";
 
 export const useCurrentPage = () => {
-  return useRouter(router, ({ target }) => target);
+  return useUniversalRouter(router, ({ target }) => target);
 };

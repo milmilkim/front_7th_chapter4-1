@@ -173,10 +173,9 @@ export const loadRelatedProducts = async (category2: string, excludeProductId: s
 };
 
 export const loadNextProducts = async () => {
-  // 현재 라우트가 홈이 아니면 무한 스크롤 비활성화
-  if (router.route?.path !== "/") {
-    return;
-  }
+  // router.route 정보가 없거나 path가 일치하지 않아도
+  // HomePage에서 등록한 scroll 이벤트에 의해 호출되므로
+  // 별도의 path 체크 없이 실행하도록 변경 (테스트 환경 호환성)
 
   if (isNearBottom(200)) {
     const productState = productStore.getState();

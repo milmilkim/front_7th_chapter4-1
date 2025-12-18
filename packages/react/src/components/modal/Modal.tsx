@@ -19,7 +19,10 @@ const Header = ({ children }: PropsWithChildren) => {
 const Container = ({ children }: PropsWithChildren) => {
   return (
     <div className="flex min-h-full items-end justify-center p-0 sm:items-center sm:p-4">
-      <div className="relative bg-white rounded-t-lg sm:rounded-lg shadow-xl w-full max-w-md sm:max-w-lg max-h-[90vh] overflow-hidden">
+      <div
+        className="relative bg-white rounded-t-lg sm:rounded-lg shadow-xl w-full max-w-md sm:max-w-lg max-h-[90vh] overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
     </div>
@@ -41,11 +44,8 @@ const ModalRoot = ({ children }: Readonly<PropsWithChildren>) => {
   }, [modal]);
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto cart-modal">
-      <div
-        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity cart-modal-overlay"
-        onClick={modal.close}
-      />
+    <div className="fixed inset-0 z-50 overflow-y-auto cart-modal" onClick={modal.close}>
+      <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity cart-modal-overlay" />
 
       {children}
     </div>
